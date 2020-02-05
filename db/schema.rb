@@ -12,14 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2020_02_04_094324) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.integer "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
@@ -28,8 +25,8 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -67,8 +64,8 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "sku_id", null: false
+    t.integer "order_id", null: false
+    t.integer "sku_id", null: false
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -82,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
     t.string "tel"
     t.string "address"
     t.text "note"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "state", default: "pending"
     t.datetime "paid_at"
     t.string "transaction_id"
@@ -93,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.bigint "vendor_id", null: false
+    t.integer "vendor_id", null: false
     t.decimal "list_price"
     t.decimal "sell_price"
     t.boolean "on_sell", default: false
@@ -101,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id"
+    t.integer "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["code"], name: "index_products_on_code", unique: true
     t.index ["deleted_at"], name: "index_products_on_deleted_at"
@@ -109,7 +106,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_094324) do
   end
 
   create_table "skus", force: :cascade do |t|
-    t.bigint "product_id", null: false
+    t.integer "product_id", null: false
     t.string "spec"
     t.integer "quantity"
     t.datetime "deleted_at"
